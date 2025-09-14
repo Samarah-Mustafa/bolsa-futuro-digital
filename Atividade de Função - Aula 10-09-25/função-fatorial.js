@@ -1,3 +1,6 @@
+//Escreva uma função que calcule e retorne o fatorial de um número inteiro fornecido pelo usuário.
+
+
 function calcularFatorial(numero) {
     let fatorial = 1; 
     for (let i = 1; i <= numero; i++) {
