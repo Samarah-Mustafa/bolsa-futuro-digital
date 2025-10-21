@@ -1,7 +1,6 @@
 //Crie uma classe que modele um aluno de academia:
 // Atributos: Nome, data de nascimento, peso e altura.
 // Métodos: Calcula idade.
-
 class AlunoAcademia {
     constructor(
         public nome: string,
