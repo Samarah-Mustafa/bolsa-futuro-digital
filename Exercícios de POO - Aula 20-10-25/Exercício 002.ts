@@ -9,7 +9,7 @@ class Aluno {
         public altura: number
     ) {}
 
-    calculaIdade(): number {
+    public calculaIdade(): number {
         const hoje = new Date();
         let idade = hoje.getFullYear() - this.dataNascimento.getFullYear();
         if (hoje.getMonth() < this.dataNascimento.getMonth() ||
@@ -34,13 +34,13 @@ class AvaliacaoFisica {
         public medidas: MedidasCorporais
     ) {}
 
-    static criar(data: Date, peso: number, medidas: MedidasCorporais, aluno: Aluno): AvaliacaoFisica {
+    public static criar(data: Date, peso: number, medidas: MedidasCorporais, aluno: Aluno): AvaliacaoFisica {
         const alturaAoQuadrado = aluno.altura * aluno.altura;
         const imc = alturaAoQuadrado > 0 ? peso / alturaAoQuadrado : 0;
         return new AvaliacaoFisica(data, peso, imc, medidas);
     }
 
-    exibirDetalhes(): void {
+    public exibirDetalhes(): void {
         console.log(`  - Data: ${this.data.toLocaleDateString('pt-BR')}`);
         console.log(`  - Peso: ${this.peso.toFixed(1)} kg`);
         console.log(`  - IMC: ${this.imc.toFixed(2)}`);
@@ -49,10 +49,10 @@ class AvaliacaoFisica {
 }
 
 class HistoricoAvaliacoes {
-    public idMatricula: string;
-    public dataMatricula: Date;
-    public aluno: Aluno;
-    public avaliacoesFisicas: AvaliacaoFisica[] = [];
+    private readonly idMatricula: string;
+    private readonly dataMatricula: Date;
+    private readonly aluno: Aluno;
+    private avaliacoesFisicas: AvaliacaoFisica[] = [];
 
     constructor(idMatricula: string, dataMatricula: Date, aluno: Aluno) {
         this.idMatricula = idMatricula;
@@ -60,12 +60,12 @@ class HistoricoAvaliacoes {
         this.aluno = aluno;
     }
 
-    adicionarAvaliacao(avaliacao: AvaliacaoFisica): void {
+    public adicionarAvaliacao(avaliacao: AvaliacaoFisica): void {
         this.avaliacoesFisicas.push(avaliacao);
         this.avaliacoesFisicas.sort((a, b) => a.data.getTime() - b.data.getTime());
     }
 
-    informacoesDoAluno(): void {
+    public informacoesDoAluno(): void {
         console.log(`\n--- Dados Cadastrais (Matrícula #${this.idMatricula}) ---`);
         console.log(`Nome: ${this.aluno.nome}`);
         console.log(`Idade: ${this.aluno.calculaIdade()} anos`);
@@ -73,7 +73,7 @@ class HistoricoAvaliacoes {
         console.log(`Data Matrícula: ${this.dataMatricula.toLocaleDateString('pt-BR')}`);
     }
 
-    informacoesDaUltimaAvaliacao(): void {
+    public informacoesDaUltimaAvaliacao(): void {
         const ultima = this.avaliacoesFisicas[this.avaliacoesFisicas.length - 1];
 
         if (!ultima) {
@@ -86,7 +86,7 @@ class HistoricoAvaliacoes {
         ultima.exibirDetalhes();
     }
 
-    informacoesDeUmaAvaliacao(indice: number): void {
+    public informacoesDeUmaAvaliacao(indice: number): void {
         const avaliacao = this.avaliacoesFisicas[indice];
 
         if (!avaliacao) {
