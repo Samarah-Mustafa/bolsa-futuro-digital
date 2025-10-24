@@ -2,7 +2,7 @@
 //Atributos: número da conta, nome do correntista e saldo.
 //Métodos: alterar nome, depósito e saque.
 class ContaCorrente {
-    private _numeroConta: string;
+    private readonly _numeroConta: string;
     private _nomeCorrentista: string;
     private _saldo: number;
 
@@ -12,12 +12,24 @@ class ContaCorrente {
         this._saldo = saldo;
     }
 
-    alterarNome(novoNome: string): void {
+    public get numeroConta(): string {
+        return this._numeroConta;
+    }
+
+    public get nomeCorrentista(): string {
+        return this._nomeCorrentista;
+    }
+
+    public get saldo(): number {
+        return this._saldo;
+    }
+
+    public alterarNome(novoNome: string): void {
         this._nomeCorrentista = novoNome;
         console.log(`Nome alterado com sucesso para: ${this._nomeCorrentista}`);
     }
 
-    deposito(valor: number): boolean {
+    public deposito(valor: number): boolean {
         if (valor > 0) {
             this._saldo += valor;
             console.log(`Depósito de R$ ${valor.toFixed(2)} realizado. Novo saldo: R$ ${this._saldo.toFixed(2)}`);
@@ -27,7 +39,7 @@ class ContaCorrente {
         return false;
     }
 
-    saque(valor: number): boolean {
+    public saque(valor: number): boolean {
         if (valor > 0 && this._saldo >= valor) {
             this._saldo -= valor;
             console.log(`Saque de R$ ${valor.toFixed(2)} realizado. Novo saldo: R$ ${this._saldo.toFixed(2)}`);
@@ -42,11 +54,11 @@ class ContaCorrente {
         return false;
     }
 
-    exibirInformacoes(): void {
+    public exibirInformacoes(): void {
         console.log("\n--- Informações da Conta ---");
-        console.log(`Número da Conta: ${this._numeroConta}`);
-        console.log(`Correntista: ${this._nomeCorrentista}`);
-        console.log(`Saldo Atual: R$ ${this._saldo.toFixed(2)}`);
+        console.log(`Número da Conta: ${this.numeroConta}`);
+        console.log(`Correntista: ${this.nomeCorrentista}`);
+        console.log(`Saldo Atual: R$ ${this.saldo.toFixed(2)}`);
         console.log("----------------------------");
     }
 }
